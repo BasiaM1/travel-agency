@@ -20,24 +20,17 @@ export const getFilteredTrips = ({ trips, filters }) => {
   }
   // TODO - filter by tags
   if (filters.tags.length > 0) {
-    output = output.filter((trip) => {
-      for (let tag of filters.tags) {
-        if (!trip.tags.includes(tag)) {
-          return false;
-        }
-        return true;
-      }
-    });
+    output = output.filter((trip) =>
+      filters.tags.some((tag) => trip.tags.includes(tag))
+    );
   }
 
   // TODO - sort by cost descending (most expensive goes first)
-  // output = output.sort((trip.cost[i], trip.cost[i + 1]) => {
-  //   const cost1 = parseFloat(trip.cost[i].replace('$', '').replace(',', ''));
-  //   const cost2 = parseFloat(
-  //     trip.cost[i + 1].replace('$', '').replace(',', '')
-  //   );
-  //   return cost2 - cost1;
-  // });
+  output = output.sort((trip1, trip2) => {
+    const cost1 = parseFloat(trip1.cost.replace('$', '').replace(',', ''));
+    const cost2 = parseFloat(trip2.cost.replace('$', '').replace(',', ''));
+    return cost2 - cost1;
+  });
   return output;
 };
 
