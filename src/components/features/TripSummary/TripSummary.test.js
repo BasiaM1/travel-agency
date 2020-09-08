@@ -20,8 +20,8 @@ describe('Component TripSummary', () => {
 
     const renderedLink = component.find('Link').prop('to');
     expect(renderedLink).toEqual(expectedLink);
-    expect(component.find('article').prop('src')).toEqual(expectedImage);
-    expect(component.find('article').prop('alt')).toEqual(expectedAltImage);
+    expect(component.find('img').prop('src')).toEqual(expectedImage);
+    expect(component.find('img').prop('alt')).toEqual(expectedAltImage);
   });
   it('should render correctly props name cost and days', () => {
     const expectedName = 'tripName';
@@ -39,8 +39,12 @@ describe('Component TripSummary', () => {
     );
 
     expect(component.find('.title').text()).toEqual(expectedName);
-    expect(component.find('.details').text()).toEqual(expectedDays);
-    expect(component.find('.details').text()).toEqual(expectedCost);
+    expect(component.find('.details span').text()).toEqual(
+      `${expectedDays} days`
+    );
+    expect(component.find('.details span').text()).toEqual(
+      `from ${expectedCost}`
+    );
   });
   it('should throw error without required props', () => {
     expect(() => shallow(<TripSummary />)).toThrow();
