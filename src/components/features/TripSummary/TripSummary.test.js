@@ -39,10 +39,10 @@ describe('Component TripSummary', () => {
     );
 
     expect(component.find('.title').text()).toEqual(expectedName);
-    expect(component.find('.details span').text()).toEqual(
+    expect(component.find('.details span').at(0).text()).toEqual(
       `${expectedDays} days`
     );
-    expect(component.find('.details span').text()).toEqual(
+    expect(component.find('.details span').at(1).text()).toEqual(
       `from ${expectedCost}`
     );
   });
