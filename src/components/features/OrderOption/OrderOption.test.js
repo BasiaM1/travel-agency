@@ -18,12 +18,11 @@ describe('Component OrderOption', () => {
   it('should render correct correct name', () => {
     const expectedName = 'OrderName';
 
-    const component = shallow(
-      <OrderOption name={expectedName} type="typeOrder" />
-    );
+    const component = shallow(<OrderOption name={expectedName} />);
 
     const renderedName = component.find('.title').text();
     expect(renderedName).toEqual(expectedName);
+    console.log(component.debug());
   });
 });
 
