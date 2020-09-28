@@ -17,8 +17,10 @@ describe('Component OrderOption', () => {
   });
   it('should render correct correct name', () => {
     const expectedName = 'OrderName';
-
-    const component = shallow(<OrderOption name={expectedName} />);
+    const expectedType = 'OrderType';
+    const component = shallow(
+      <OrderOption name={expectedName} type={expectedType} />
+    );
 
     const renderedName = component.find('.title').text();
     expect(renderedName).toEqual(expectedName);
@@ -137,7 +139,7 @@ for (let type in optionTypes) {
         });
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent
-            .find(`input[type="${testValue}"]`)
+            .find(`input[value="${testValue}"]`)
             .simulate('change', { currentTarget: { checked: true } });
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({
@@ -154,7 +156,7 @@ for (let type in optionTypes) {
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent
             .find('input')
-            .simulate('change', { currentTarget: { value: testValue } });
+            .simulate('change', { currentTarget: { value: testValueNumber } });
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({
             [mockProps.id]: testValueNumber,
