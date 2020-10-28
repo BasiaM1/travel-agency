@@ -1,18 +1,21 @@
 export const formatTime = (param) => {
-  const seconds = Math.floor(param % 60);
-  const minutes = Math.floor((param / 60) % 60);
-  const hours = Math.floor(param / 3600);
-
-  const time =
-    hours.toString().padStart(2, '0') +
-    ':' +
-    minutes.toString().padStart(2, '0') +
-    ':' +
-    seconds.toString().padStart(2, '0');
-
-  if (param === undefined || typeof (param != 'number') || param < 0) {
+  if (param === undefined || typeof (param) != 'number' || param < 0) {
     return null;
-  } else {
-    return time;
   }
+  let seconds = Math.floor(param % 60);
+  let minutes = Math.floor((param / 60) % 60);
+  let hours = Math.floor(param / 3600);
+  if (hours < 10) {
+    hours = hours.toString().padStart(2, '0');
+  }
+  if (minutes < 10) {
+    minutes = minutes.toString().padStart(2, '0');
+  }
+  if (seconds < 10) {
+    seconds = seconds.toString().padStart(2, '0');
+  }
+
+  console.log(`${hours}:${minutes}:${seconds}`);
+
+  return `${hours}:${minutes}:${seconds}`;
 };
