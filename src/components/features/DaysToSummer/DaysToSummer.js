@@ -4,31 +4,18 @@ import styles from './DaysToSummer.scss';
 class DaysToSummer extends React.Component {
   getCountdownDate() {
     const currentDate = new Date();
-    const summerStart = new Date(Date.UTC(currentDate.getUTCFullYear(), 5, 21));
-    const summerEnd = new Date(Date.UTC(currentDate.getUTCFullYear(), 8, 23));
-    const nextYear = currentDate.getUTCFullYear() + 1;
-    const nextSummerStart = new Date(Date.UTC(nextYear, 5, 21));
-    const oneDayToSummer = new Date( Date.UTC(currentDate.getUTCFullYear(), 5, 20));
+    const summerTime = new Date(Date.UTC(currentDate.getUTCFullYear(), 5, 21));
 
-    let daysToSummer = '';
-
-    if (currentDate <= summerEnd && currentDate >= summerStart) {
-      daysToSummer;
-    } else if (currentDate > summerEnd) {
-      daysToSummer =
-        Math.round(
-          (nextSummerStart.getTime() - currentDate.getTime()) /
-            (1000 * 60 * 60 * 24)
-        ) + ' days to summer!';
-    } else if (currentDate < summerStart) {
-      if (currentDate === oneDayToSummer) {
-        daysToSummer = '1 day to summer!';
-      } else {
-        daysToSummer =
-          Math.round((summerStart.getTime() - currentDate.getTime()) /(1000 *60 *60 *24 )) + ' days to summer!';
-      }
+    if (currentDate.getMonth() > 8 || (currentDate.getUTCMonth() === 8 && currentDate.getUTCDate() > 23)) {
+      summerTime.setUTCFullYear(summerTime.getUTCFullYear() + 1);
     }
-    return daysToSummer;
+    const daysToSummer = Math.round((summerTime.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (daysToSummer === 1) {
+      return '1 day to summer!';
+    } else if (daysToSummer <= 0 && daysToSummer >= -94) {
+      return '';
+    } else return daysToSummer + ' days to summer!';
   }
 
   render() {

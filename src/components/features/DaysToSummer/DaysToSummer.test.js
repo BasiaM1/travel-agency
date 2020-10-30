@@ -37,7 +37,7 @@ const mockDate = (customDate) =>
 
 const checkDescriptionAtDate = (date, expectedDescription) => {
   it(`should show correct at ${date}`, () => {
-    global.Date = mockDate(`${date}T00:00:00.135Z`);
+    global.Date = mockDate(`${date}T00:00:00.000Z`);
 
     const component = shallow(<DaysToSummer />);
     const renderedDays = component.find(select.title).text();
